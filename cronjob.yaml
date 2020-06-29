@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pull
+spec:
+  schedule: "*/60 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pull
+            image: busybox
+            command: ["/bin/bash"]
+            args: ["-c", "cd /var/www/html/covid_branch/covid-chestxray-dataset-master && /usr/bin/git pull https://github.com/ieee8023/covid-chestxray-dataset  && cd /var/www/html/ && ./make_thumb "]
+            volumeMounts:
+            - name: cron-pv-storage
+              mountPath: /var/www/html
+          restartPolicy: OnFailure
+          volumes:
+            - name: cron-pv-storage
+              persistentVolumeClaim:
+                claimName: cron-pv-claim
