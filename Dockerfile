@@ -1,3 +1,3 @@
 FROM php:5-apache
-COPY public/ /var/www/html/
+#COPY public/ /var/www/html/
 
