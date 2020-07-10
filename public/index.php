@@ -43,7 +43,7 @@
 			echo "dir is null";
 		}
                 else{
-                        echo "GAMW OLA!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                        echo "";
 		}
                 ob_end_clean();
 
